@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+{% block body %}
+
+        <form action="" method="post">
+
+     <p><input class="btn btn-lg btn-success" type="submit" name="button" value="Get the Forecast"></p>
+        <p class="lead">OR</p>
+        <p class="lead">Get conditions for a historical week</p>
+        <p>
+
+            {{ form.csrf }}
+ 
+            <!-- <div class="input text"> -->
+	    <p class="lead">
+                {{ form.name.label }} {{ form.name }}
+            
+	    <!-- </div> -->
+ 
+    <!--        <div class="input submit"> -->
+		<input class="btn btn-lg btn-success" type="submit" name="button" value="Get Conditions">
+		</p>
+                <!--<input type="submit" value="Get Conditions" /> -->
+          <!-- </div> -->
+        </form>
+
+
+{% endblock %}
+
+
+{% block output %}
+   {% if result != 0 %}
+
+	<table class="table">
+	<tr>
+        {% for dtxt in datetxt %}
+            <th class="text-center"> {{ dtxt[0] }}<br>{{ dtxt[1] }}</th>
+	{% endfor %}
+
+	</tr><tr>
+
+	{% for im in images %}
+            <td align="center">
+		<img src="/static/images/{{ im }}"/></td>
+	{% endfor %}
+
+	</tr><tr>
+	{% for ex in extras %}
+            <td align="center">
+	{% for item in ex %}
+	    <img src="/static/images/{{ item }}"/>
+	{% endfor %}
+		</td>
+	{% endfor %}
+
+		
+	</tr>
+
+
+	</table>
+	
+
+   {% endif %}
+
+{% endblock %}
